@@ -5,15 +5,15 @@ const router = express.Router();
 //User Model
 const User = require('../models/user');
 
-router.get("/users/login", (req, res, next) => {
+router.get("/login", (req, res, next) => {
     res.render('login');
 });
 
-router.get("/users/register", (req, res, next) => {
+router.get("/register", (req, res, next) => {
     res.render('register');
 });
 
-router.post("/users/register", (req, res, next) => {
+router.post("/register", (req, res, next) => {
     let { name, email, password, password2 } = req.body;
     console.log(req.body);
     //Error Handling
@@ -57,7 +57,8 @@ router.post("/users/register", (req, res, next) => {
                             console.log(hash)
                             newUser.password = hash;
                             newUser.save().then(msg => {
-                                res.render('users/login');
+                                req.flash('success_msg', 'You are now registered , go ahead and login');
+                                res.redirect('/users/login');
 
                             })
                         })

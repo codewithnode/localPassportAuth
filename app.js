@@ -45,7 +45,7 @@ app.use(express_ejs_layout);
 app.set('view engine', 'ejs');
 
 app.use(indexRoute);
-app.use(usersRoute);
+app.use('/users', usersRoute);
 
 //Webserver
 app.listen(3000, () => {
